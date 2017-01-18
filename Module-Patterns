@@ -1,1 +1,95 @@
+# Node JS Module Patterns
+# How to create custom module and export the functionality of custom & predefine modules into other pages in Node JS?
+Steps
+1.`Require` function will allow to include the files in Node JS
+2.Module use `exports` to make things available to other pages.
+For Examples
+1.Simple Module
+>firstModule.js
+console.log('Vikas Bose');
+>app.js //while running the app.js, it will print the value of `firstModule.js` page
+require(firstModule.js);
 
+2.Define the `Globally` [It is not the right way because it will consume the global space]
+>firstModule.js
+var firstModule = function(){
+  console.log('Vikas Bose');
+}
+>app.js
+require('./firstModule.js');
+firstModule();
+
+3.Exports an `Anonymous`function [Keep your file name and module name same, so it will be easy to access and differentiate]
+>firstModule.js
+module.exports = function(){
+  console.log('Vikas Bose');
+}
+OR
+var firstModule = function(){
+  console.log('Vikas Bose');
+}
+module.exports = firstModule;
+>app.js
+var firstModule = require('./firstModule.js');
+firstModule();
+
+4.Export a `Name` function
+>firtModule.js
+exports.address = function(){
+  console.log('Jabalpur');
+}
+>app.js
+var address = require('./firstModule.js').address;
+address();
+
+5.Export an `Anonymous Object`
+>firstModule.js
+var Buz = function(){};
+Buz.prototype.log = function(){
+  console.log('Vikas log!');
+};
+module.exports = New Buz();
+>app.js
+var buz = require('./firstModule.js');
+buz.log();
+
+6.Export an `Name Object`
+>firstModule.js
+var Buz = function(){};
+Buz.prototype.log = function(){
+  console.log('Vikas log!');
+};
+exports.Buz = New Buz();
+>app.js
+var buz = require('./firstModule.js').Buz;
+buz.log();
+
+7.Export an `Anonymous Prototype`
+>firstModule.js
+var Buz = function(){};
+Buz.prototype.log = function(){
+  console.log('Vikas log!');
+};
+module.exports = Buz;
+>app.js
+var Buz = require('./firstModule.js');
+var buz = New Buz();
+buz.log();
+
+8.Export an `Name Prototype`
+>firstModule.js
+var Buz = function(){};
+Buz.prototype.log = function(){
+  console.log('Vikas log!');
+};
+exports.Buz = Buz;
+>app.js
+var Buz = require('./firstModule.js').Buz;
+var buz = New Buz();
+buz.log();
+
+Important Points:
+1.Name Exports - one modules, many exported things
+2.Anonymous Exports - simpler client interface
+
+Note: If you use the `custom` Module then you must use `./` as prefix of your custome module name.
