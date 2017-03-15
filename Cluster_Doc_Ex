@@ -1,0 +1,28 @@
+# Working on clustor using Node JS
+
+Cluster module allow to create the child process and share the same port
+if you try to print the cluster class then it will send the object with below values
+  { "domain": null,
+    "_events": {}, //Empty object, so might you can define your event manually
+    "_eventsCount": 0,
+    "isWorker": false, //If the process not Master then it is return the negative value. 
+    "isMaster": true, //If process.env.NODE_UNIQUE_ID determine by the Node and it is undefine then process must be master and it will set true 
+    "worker": {}, // 
+    "setting": {}, // 
+    "schedulingPolicy": 1, // 
+    "SCHED_NONE": 1, // 
+    "SCHED_RR": 2
+  }
+  
+How It Works?
+
+Cluster/Master listen the main port and Worker process child process using child_porcess.fork() method and connect with master using IPC. Two reasons, 
+  > to use the cluster because it will not allow to do overloading, 
+  > and interesed workers can use the listen port.
+
+Related `Events` in Worker Class
+  1. cluster.on('disconnect') // for all workers disconnect
+  2. cluster.fork().on('disconnect', () => { .... }); //specific worker can be disconnect
+  3. process.on('error') // if any error via worker
+  4. cluster.fork().on('exit', (code, signal) => { ... }); OR cluster.fork().on('exit');
+  5. 
