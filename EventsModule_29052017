@@ -1,0 +1,44 @@
+#Event:-
+
+Node JS API built around idiomatic asyncronous event-driven architecture, in which certain kinds of object (called 'emitter') periodically emit named events that cause function objects (called 'listeners).
+For instance: 
+	1. a net.Server object emits an event each time a peer connects to it; 
+	2. a fs.ReadStream emits an event when the file is opened; 
+	3. a stream emits an event whenever data is available to be read.
+$ event is module
+$ EventEmitter is class (inharite class) // class MyEmitter extends EventEmitter {}
+$ emitter.on(eventName, listener) // allow one or more functions to be attached to named events emitted by object. It will give you itteration of result.
+$ emitter.emit() //method is used to trigger the event.
+
+Ex. const EventEmitter = require('events');
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+myEmitter.on('event', () => {
+  console.log('This is new event');
+}).emit('event');
+Output: All statements + true
+
+#Passing arguments in functions
+You can also pass the multiple arguments init but while you pass the argument on function, you must pass `this` also. It is important to keep in mind that when an ordinary listener function is called by the EventEmitter, the standard this keyword is intentionally set to reference the EventEmitter to which the listener is attached. Example
+
+const EventEmitter = require('events');
+class MyEmitter extends EventEmitter {}
+
+const myEmitter = new MyEmitter();
+myEmitter.on('event', (a, b) => {
+  console.log(a, b, this);
+}).emit('event', 'vikas','bose');
+
+#Asynchronous Vs. Synchronous
+The EventListener calls all listner synch in oder to which they were registered. If the EventListener switch to an asynch mode, it uses setImmediate() or process.nextTick() methods. Example
+
+myEmitter.on('event', (a, b) => {
+ setImmediate(() => {
+   console.log('This is Asynch');
+	});
+}).emit('event', 'a', 'b');
+
+
+
+
