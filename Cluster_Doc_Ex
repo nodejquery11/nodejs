@@ -1,5 +1,35 @@
 # Working on clustor using Node JS
 
+? What is cluster
+
+cluster is the concept in the node js and it will give the ability to node js to run in the multi core system. As node js single threaded
+and single process but clustor give ability to node js to create child process or worker node. So your application will run into multiple
+code system and performance will go increse and handle the load balancing.
+
+? How It Works
+
+Cluster/Master listen the main port and Worker process r child process using child_porcess.fork() method and connect with master using IPC.
+Two reasons, 
+  > to use the cluster because it will not allow to do overloading, 
+  > and interesed workers can use the listen port.
+
+var http = require('http');
+var cluster = require('cluster');
+var numCPUs = require('os').cpus().length;
+if(cluster.isMaster){
+  for(var i=0; i<numCPUs; i++) {
+     cluster.fork(); //this will divide the number of process into different child process or worker of core system
+  }
+  cluster.on('exit', function(worker, code, signal) { //if any core system get die 
+    consloe.log(`Worker ${worker} died`);
+  });
+ } else {
+   http.creatServer(function(req, res, next) {
+     res.writeHead(200);
+     res.end('Vikas Bose');
+   }).listen(3000);
+ } [this code will first check the mater CPU, then it will create child process and then run the connection string all the worker CPUs]
+
 Cluster module allow to create the child process and share the same port
 if you try to print the cluster class then it will send the object with below values
   { "domain": null,
@@ -13,16 +43,12 @@ if you try to print the cluster class then it will send the object with below va
     "SCHED_NONE": 1, // 
     "SCHED_RR": 2
   }
-  
-How It Works?
-
-Cluster/Master listen the main port and Worker process child process using child_porcess.fork() method and connect with master using IPC. Two reasons, 
-  > to use the cluster because it will not allow to do overloading, 
-  > and interesed workers can use the listen port.
 
 Related `Events` in Worker Class
+ If you want to perform event in root level
   1. cluster.on('disconnect') // for all workers disconnect
-  2. cluster.fork().on('disconnect', () => { .... }); //specific worker can be disconnect
-  3. process.on('error') // if any error via worker
-  4. cluster.fork().on('exit', (code, signal) => { ... }); OR cluster.fork().on('exit');
+  2.  process.on('error') // if any error via worker
+ If you perform event in worker or core system level  
+  1. cluster.fork().on('disconnect', () => { .... }); //specific worker can be disconnect
+  2. cluster.fork().on('exit', (code, signal) => { ... }); OR cluster.fork().on('exit');
   5. 
