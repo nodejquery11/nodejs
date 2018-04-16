@@ -1,5 +1,22 @@
-# Working on clustor using Node JS
+# Async Hooks [http://thlorenz.com/talks/async-hooks/book/what_are_async_hooks/what_are_async_hooks_0.html]
+? what is Async hooks
+Async hooks allow to the developer to track the asyschronus request and handle their entier life-cycle.
+? Why do we need it
+Few callback may be called multiple time for example like connection string and few are call at once like file reading. So it will just 
+let the developer knows that which process call multiple callBacks asynchronusly.
+ $ few methods in Async hooks
+    let eid = async_hooks.executionAsyncId(); [current execution context id][initially it must be 1]
+    let tid = async_hooks.triggerAsyncId(); [responsible for triggering the callback of the current execution scope to call][shows: 0]
+    const asyncHooks = aynsc_hooks.createHook({ init, before, after, distroy, promiseSolved }); [it will create the async hooks 
+    instance, all parameters are optional]
+    asyncHooks.enable(); [to enable the new async hooks]
+    asyncHooks.disable(); [to disable the current async hooks]
+    function init(asyncId, type, triggerAsyncId, resource) [it will created during object constructor][promiseResolve called once 
+    resolve function passed into the promise function]
 
+? Where can we use it
+
+# Working on clustor using Node JS
 ? What is cluster
 
 cluster is the concept in the node js and it will give the ability to node js to run in the multi core system. As node js single threaded
