@@ -1,3 +1,12 @@
+# IMP URL: 
+      1.https://www.javatpoint.com/nodejs-buffers [Node Js]
+      2.https://javascript.info/ [Advance JS]
+      3.https://www.promisejs.org/ [Promise-Node Js]
+      4.https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises [Promise in JS]
+      5.https://www.twilio.com/blog/2015/10/asyncawait-the-hero-javascript-deserved.html [others]
+      6.https://lodash.com/docs/4.17.5 [others]
+      7.http://ccoenraets.github.io/es6-tutorial/setup-babel/ [others]
+
 # Async Hooks 
       [http://thlorenz.com/talks/async-hooks/book/what_are_async_hooks/what_are_async_hooks_0.html]
       [https://blog.safia.rocks/post/170614460245/discovering-async-hooks]
@@ -23,9 +32,39 @@ let the developer knows that which process call multiple callBacks asynchronusly
 
 # Buffer
 ? what is buffer
+It is kind of mechnizam where we block or create chunk of data size and send into the server instead directly send all the data into the server. It also create the memory allocation outside of v8 heap. Buffer class is used because JS is not good to handle the binary data.
+Syntax: 
+  let buffer = require('buffer') or let buffer = require('buffer').Buffer [Here `Buffer` is the main function of buffer module];
+  OR
+  let buf = new Buffer(<size_of_buffer>);
+  > Note: differnce b/w both syntax is fist syntax containt specific methods, however second one only engage the methods.
+  > poolSize: this is the number of bytes to pre-allocated internal buffer use for pooling. Default value is 8192 Bytes and this default value can be change. If you manually pass the value into the buffer then it may update the lenght of poolSize.
+  > buffer.alloc(size): it will allocated the memory to buffer with zero-filled. And if you do not pass the `size` then it will throw an error. if you want the buffer filled with some other values then u must use buffer.alloc(size, value); And instead of integer, if u pass char then it will take ascii value of char and fill the buffer
+  > buffer.allocUnsafe(size): create uninitilized buffer and it is faster then `alloc` method but not secure. Because it might contain the previous or old data in it. To overwrite it, we need to execute the function call fill() & write().
+  > ?How to create or insert array into buffer
+    buffer.from([values]) or new Buffer([values]);
+  > ?How to write into buffer
+    in the first method, single fnction can do both read and writing but if u use the buffer class then u must pass the argument directly from buffer class. however, buffer.write will display the number of charectors.
+    Ex, bufWrite = buffer.from("hello world", "utf8"); [it will return the binary code with consume the buffer memory]
+        buffer = new Buffer("Hello World", "utf8") bufWrite = buffer.write(); [it will return the lenght of string]
+        bff.toString() will print the initial value for both pattern.
+  > If you pass the buffer value from buffer.from then it will reserve the memory allocation of buffer.
+const buf = buffer.from('This vikas bose', "utf8");
+const buf1 = buffer.from('Hello!', "utf8");
+const buf2 = buffer.from('World!', "utf8");
+buf.compare(buf1); // false
+buf.concat([buf1, buf2], totallength); //This vikas bose Hello! World
+buffer.isBuffer(buf); // true
+buffer.isEncoding(buf); // true
+buffer.poolSize; // default: 8192
+buffer.copy(target, start, destination, end);
+buf.equal(buf2); // false because buf !== buf2 no value
+buf.fill('h'); // it will replace the `buffer` value `h`
+buf.includes('this'); // searching the agr into buffer and this is case sensitive
+buf.indexOf('this'); // it will return the index number
+buf.values(); // to return the value of buffer string array r object
 
-
-# Working on clustor using Node JS
+# clustor
 ? What is cluster
 cluster is the concept in the node js and it will give the ability to node js to run in the multi core system. As node js single threaded
 and single process but clustor give ability to node js to create child process or worker node. So your application will run into multiple
