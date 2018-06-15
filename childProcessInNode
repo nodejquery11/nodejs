@@ -1,0 +1,94 @@
+# Note: child process & cluster both module features are similar
+# child process is the methology to start new process with either command, a file, a node program. This module also execute the external command based on your OS.
+
+# Important functions in child process & creating to way of child process
+  it divided into two categories Async & Sync
+    exec(command, { ,option}, callback)      | execSync()            [method runs command into the shell/console and store into buffer]
+    const cp = require('chile_process');
+    let comand = {
+      list: "ls",
+      remove: "rm"
+    };
+    cp.exec(comand.remove+" -r css", (err, stdout, stderror) => {
+       if(err) {
+         console.log(`name: ${err.name}\n Message: ${err.message}\n stack: ${err.stack}`);
+       } else {
+         console.log(stdout);
+       }
+    }); [ this will remove the css folder, -r is do process recursively.]
+    
+    execFile()                               | execFileSync()        []
+    spawn(command, [, arg], [ ,option])      | spawnSync()           [launch the new process with given command]
+    fork(modulePath, [, arg], [ ,option])                            [in special cases, create child process of spawn]
+    
+# Why do need child process in Node Js
+1. Node js run in the single-thread but use the event-driven paradigm to handle concurrency.
+2. child process give you leverage to handle the parallel process on multi-core CPU based system.
+Three streams are childProcess.stdin, childProcess.stdout and childProcess.stderr
+
+# Where and how can we use or implement the child process in applciation using node js
+1. if we do need to execute the background job then we can use child_process
+2. To improve the performance of your application because you can create the child process and run the more consuming process into difference CPU.
+
+# Difference b/w exec & spawn methos
+1. major difference b/w both is exec will have callBack but spawn will do not have callback.
+2. exec will return the buffer with max size and wait till the process not finish and it will return the entire buffer data once. However spawn will return the stream and it should be used when process return the volume of data. spawn will receiving response as soon as process start executing.
+
+# Difference between child_process & cluster
+1. child_process will work only application prospective where as cluster work for OS & CPU level 
+2. In child_process, we will execute the process which block the node js event-driven feature. However, cluster create or utilize the CPU core system to assign the individual process so it is just utilize the entier CUP process.
+3. child_process will improve the application process but cluster improve the application & system process.
+
+
+
+# Node Js (an asset)
+Mercedez Benz
+Exp: HTML, JavaScript, Node Js
+Exp: JSON & XMLs based extensive work
+Exp: Logic building skills
+Microservices Explained
+Elasic search in Node Js
+
+# what is microservices Architecture and mono-lithic achitecture
+combine the (microservices)
+  independent services (upgrade easily)
+  communication (location registory)
+  Standard protocols (failure resilient)
+  well define interface (diagnostic)
+
+Mono-lithic Arch:
+  1. tight coupling (ex. if we remove any of layer remove then entire application break)
+  2. in this arch, tough to upgrade and add new functionality.
+    userInterface layer | Business layer | Data Access layer
+    ["layers": {
+      "1": UI,
+      "2": one or more applications
+      "3": persistance layer
+     },
+     "integrated components",
+     "growth over time loading to": {
+      "1": sluggishness,
+      "2": Overworked IDE
+     }]
+Microservices Arch: distributed system
+  1. it is just plugin play arch. Here all nodes will be small application or methods. If we remove any of layer but application will run perfectly as other nodes can handle the application load.
+  2. In microservices upgrade or add the new feature is very easy.
+
+# Promises:
+ promise object will allow you to control flow of deffered & asyncoperations.
+ Syntax: var a = new promise(function(resolve, reject) {
+   ..... statement
+ });
+ $ pending, initial state, not fullfil or rejected
+ $ fulfilled, sucessful operation
+ # Methods
+    new Promise(function(resolve, reject) {...});
+    Promise.all([resolve, reject, other]).then(function(val) { ... statement}); [it will return all values as per the itteration]
+    Promise.race([resolve, reject]).then(function(val){ ... }); [it will return values as soon as any of function done]
+    Promise.prototype.catch(function(e) { ...}); [The catch() method returns a Promise and deals with rejected cases only.]
+    Promise.prototype.finally(function() { ...}); [ When the promise is settled, whether fulfilled or rejected, the specified callback function is executed.]
+    
+ 
+# setTimeout(callBack, duration); [it will be only once execute based on your duration]
+# setInterval(callBack, duration); [it is repeatatly process as mentioned the duration]
+# clearInterval(var_name) & clearTimeout(var_name)
