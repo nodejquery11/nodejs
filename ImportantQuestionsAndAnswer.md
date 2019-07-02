@@ -228,3 +228,11 @@ b.fullname = () => {
 }
 
 console.log(b.fullname());
+
+REPL: Read-Eval-Print-Loop
+What is modules?
+    - are kind of library, which contain the methods or business logic. Modules are two type 1. in-built module and 2. custom module
+    - to access the custom module, we have to follow the below step
+        - create a module with the help of JS + Node JS built functions
+        - module.exports = {module_name};
+        - you can access this module anywhere of application using required(./new_module);
