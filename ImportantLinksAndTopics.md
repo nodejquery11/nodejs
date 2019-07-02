@@ -43,3 +43,37 @@ Node Js:
   [Events]
   [Filesystem]
 
+GE: Staff Software Engineer (Javascript, React.js, Angular, Node.js) 
+1 high-quality design and development practices
+2 Architect, design, code and deploy full-scale systems based on critical business outcomes
+3 Build technology the right way: means simple, well-tested services that gradually grow over time, and that provide plenty of insight into production performance
+4 Provides input to technical lead on schedules and cost estimates.
+5 Mentors junior staf
+6 Delivered responsive solutions using Agile Methodology
+
+Standered charted bank: 
+1 HTML 5, CSS 3, SASS/ LESS, Bootstrap
+2 TypeScript, JavaScript, ES2015, Babel, Webpack, React
+3 Node. js, Express OR Java, Spring Boot
+4 MongoDB, PostgreSQL, Redis
+5 Experience with unit-testing and test automation, front-end performance optimisation
+6 Ability to design and document software architecture and APIs and easily communicate with multiple stakeholders
+7 Advanced skill in version control systems like GitHub/ Git
+8 Docker, Kubernetes, PHP, Drupal
+
+
+ZYCUS:
+· Strong understanding of JavaScript/Object Oriented JS, its quirks, and workarounds. 
+· Must have working knowledge of Node JS. 
+· Must have knowledge of any one Node JS framework such as Express.js, Hapi.js, Sails.js, etc. 
+· Understanding of REST API and MVC. 
+· Understanding of Asynchronous Request handling techniques. 
+· Understanding of Unit testing frameworks like Mocha/Chai. 
+· Proficient understanding of code versioning tools, such as SVN or GIT. 
+· Good to have understanding of Design Patterns and SOLID OOP principles. 
+· Understanding of modern JavaScript development techniques 
+
+1.session handling
+2.validate the api
+3.aws-sdk
+4.node-jwk
